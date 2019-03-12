@@ -1,6 +1,11 @@
 USE [msdb]
 GO
 
+IF EXISTS (SELECT name FROM msdb.dbo.sysjobs WHERE name=N'heretik_maint')
+BEGIN
+	exec sp_delete_job @job_name='heretik_maint'
+END
+
 /****** Object:  Job [heretik_maint]    Script Date: 3/12/2019 11:16:59 PM ******/
 BEGIN TRANSACTION
 DECLARE @ReturnCode INT
